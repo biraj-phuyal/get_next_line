@@ -5,20 +5,19 @@
 char *get_next_line(int fd)
 {
     char *str;
-    int buff;
+    char buff[100];
     char *read_line;
 
-    buff = 600;
-    str = malloc(sizeof(char) * (buff));
-    while(read(fd, str, buff))
+    str = malloc(buff);
+    while(fd)
     {
-        read_line = str;
-        if (str == NULL)
-            return (NULL);
+        read_line = read("good.txt", buff, 100);
+        if (read_line == -1)
+            return (buff);
         if (read_line == '\n')
         {
-            read_line = strcat(read_line, "\n");
-            return (read_line);
+            str = strcat(buff, "\n");
+            return (str);
         }
     }
     free(str);
