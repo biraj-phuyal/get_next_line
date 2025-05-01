@@ -1,24 +1,27 @@
-#include <fcntl.h>
-#include <string.h>
-#include <stdlib.h>
+#include "get_next_line.h"
 
 char *get_next_line(int fd)
 {
     char *str;
     char buff[100];
-    char *read_line;
+    int index;
 
-    str = malloc(buff);
     while(fd)
     {
-        read_line = read("good.txt", buff, 100);
-        if (read_line == -1)
+        index = read(fd, buff, sizeof(buff));
+        if (index == -1)
             return (buff);
-        if (read_line == '\n')
+        while (index != '\n')
         {
-            str = strcat(buff, "\n");
+          if (index == '\n')
+          {
+            str = ft_strcat(buff, "\n");
             return (str);
+          }
+          index++;
         }
+        if (index == 0)
+          return (buff);
     }
     free(str);
 }
