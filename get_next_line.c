@@ -1,28 +1,35 @@
 #include "get_next_line.h"
+#include <fcntl.h>
 
 char *get_next_line(int fd)
 {
     char *str;
     char buff[100];
-    int index;
+    static int index;
 
-    while(fd)
+    str = buff;
+    while(buff)
     {
-        index = read(fd, buff, sizeof(buff));
-        if (index == -1)
-            return (buff);
-        while (index != '\n')
+      index = read(fd, buff, sizeof(buff));
+      if (index == -1)
+      return (buff);
+      while (buff != '\n')
+      {
+        if (buff == '\n')
         {
-          if (index == '\n')
-          {
-            str = ft_strcat(buff, "\n");
-            return (str);
-          }
-          index++;
+          str = ft_strcat(buff, "\n");
+          return (str);
         }
-        if (index == 0)
-          return (buff);
+        
+      }
+      if (index == 0)
+      return (NULL);
     }
     free(str);
-}
-
+  }
+  
+  get_file_for_testing()
+  {
+    int fd = open("text.txt", O_RDONLY);
+    get_next_line(fd);
+  }
