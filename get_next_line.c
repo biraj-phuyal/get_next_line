@@ -4,7 +4,7 @@
 char *get_next_line(int fd)
 {
     char *str;
-    char buff[100];
+    char buff[BUFFER_SIZE];
     static int index;
 
     str = buff;
