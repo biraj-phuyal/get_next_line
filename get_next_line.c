@@ -8,28 +8,17 @@ char *get_next_line(int fd)
     static int index;
 
     str = buff;
-    while(buff)
+    while(index >  0)
     {
       index = read(fd, buff, sizeof(buff));
       if (index == -1)
-      return (buff);
-      while (buff != '\n')
-      {
-        if (buff == '\n')
-        {
-          str = ft_strcat(buff, "\n");
-          return (str);
-        }
-        
-      }
+        return (buff);
       if (index == 0)
-      return (NULL);
+        return (NULL);
+      if (*buff == "\n")
+      {
+        str = ft_strcat(buff, '\n');
+        return (str);
+      }
     }
-    free(str);
-  }
-  
-  get_file_for_testing()
-  {
-    int fd = open("text.txt", O_RDONLY);
-    get_next_line(fd);
-  }
+}
