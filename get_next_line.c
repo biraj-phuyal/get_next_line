@@ -17,7 +17,7 @@ char *get_next_line(int fd)
         return (NULL);
       if (*buff == "\n")
       {
-        str = ft_strcat(buff, '\n');
+        str = ft_strjoin(buff, '\n');
         return (str);
       }
     }

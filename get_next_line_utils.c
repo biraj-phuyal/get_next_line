@@ -12,7 +12,7 @@ int ft_strlen(char *buff)
   return (i);
 }
 
-char *ft_strcat(char *buff, char c)
+char *ft_strjoin(char *buff, char c)
 {
   int i;
   char *string;
@@ -32,4 +32,18 @@ char *ft_strcat(char *buff, char c)
   }
   return (string);
   free(string);
+}
+
+int check_newline(char *buff)
+{
+  int i;
+  
+  i = 0;
+  while (buff[i])
+  {
+    if (buff[i] == '\n')
+      return (1);
+    i++;
+  }
+  return (0);
 }

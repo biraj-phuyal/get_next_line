@@ -9,6 +9,6 @@
 
 char *get_next_line(int fd);
 int ft_strlen(char *buff);
-char *ft_strcat(char *buff, char c);
+char *ft_strjoin(char *buff, char c);
 
 # endif
