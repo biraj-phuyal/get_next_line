@@ -4,21 +4,18 @@
 char *get_next_line(int fd)
 {
     char *str;
-    char buff[BUFFER_SIZE];
-    static int index;
+    static char buff[BUFFER_SIZE];
+    int index;
 
-    str = buff;
+    if (fd <= 0 || BUFFER_SIZE <= 0)
+      return (NULL);
+    index = 1;
+    str = NULL;
     while(index >  0)
     {
-      index = read(fd, buff, sizeof(buff));
-      if (index == -1)
-        return (buff);
-      if (index == 0)
+      index = read(fd, buff, BUFFER_SIZE);
+      if (index < 0)
         return (NULL);
-      if (*buff == "\n")
-      {
-        str = ft_strjoin(buff, '\n');
-        return (str);
-      }
-    }
+      
+    } 
 }
