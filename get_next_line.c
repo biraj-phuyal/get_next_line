@@ -11,11 +11,14 @@ char *get_next_line(int fd)
       return (NULL);
     index = 1;
     str = NULL;
-    while(index >  0)
+    while(!has_newline(str))
     {
       index = read(fd, buff, BUFFER_SIZE);
       if (index < 0)
         return (NULL);
+      if (index == 0)
+        break ;
+      str = ft_strjoin(str, buff);
       
-    } 
+    }
 }

@@ -2,47 +2,58 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-int ft_strlen(char *buff)
+char *malloc_line(char *line)
 {
+  char *malloced_line;
   int i;
+  int j;
 
+  j = 0;
   i = 0;
-  while (buff[i])
+  while (line && line[i])
     i++;
-  return (i);
+  malloced_line = malloc(i + 1);
+  while (*line != '\0')
+  {
+    *malloced_line = *line;
+    line++;
+  }
+  *malloced_line = '\0';
+  *malloced_line++;
+  *malloced_line = '\n';
+  return (malloced_line);
 }
 
-char *ft_strjoin(char *buff, char c)
+char *ft_strjoin(char *str, char *buff)
 {
-  int i;
-  char *string;
-  int j;
-  
-  i = ft_strlen(buff);
-  string = (char)malloc(i);
-  if (!string)
-    return (NULL);
+  char *line;
+  size_t j;
+
   j = 0;
-  string = buff;
-  while (string[j] < i + 1)
+  line = str;
+  while (buff[j] != '\n')
   {
-    if (string[j] == i)
-      string[j] = c;
+    line[j] = buff[j];
     j++;
   }
-  return (string);
-  free(string);
+  line[j] = '\0';
+  j++;
+  line[j] = '\n';
+  malloc_line(line);
+  return (line);
 }
 
-int check_newline(char *buff)
+int has_newline(char *str)
 {
   int i;
   
   i = 0;
-  while (buff[i])
+  if (!str)
+    return (-1);
+  while (str[i])
   {
-    if (buff[i] == '\n')
-      return (1);
+    if (str[i] == '\n')
+      return (-1);
     i++;
   }
   return (0);
